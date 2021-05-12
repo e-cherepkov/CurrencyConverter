@@ -2,51 +2,42 @@ import React from 'react'
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import MenuItem from '@material-ui/core/MenuItem';
+import InputLabel from '@material-ui/core/InputLabel';
+import Select from '@material-ui/core/Select';
 
-
-const useStyles = makeStyles((theme) => ({
-    root: {      
-      '& .MuiTextField-root': {
-        margin: theme.spacing(1),
-        maxWidth: '250px',   
-        width: '90vw',             
-      },
-    },
-    inputBox: {
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-    }
-  }));
-
-function InputCurrency(props){
-    const classes = useStyles();
-    
+function InputCurrency(props){    
     const {
-        currencyOptions
+        currencyOptions,
+        selectCurrency,
+        onChangeCurrency,
+        onChangeAmount,
+        amount
     } = props
     
     return (
-        <div className={classes.inputBox}>
-            <form className={classes.root} noValidate autoComplete="off">
-                <TextField
-                id="standard-helperText"
+        <div>
+            <form noValidate autoComplete="off">
+                <TextField                
                 label="Значение"
+                value={amount}
+                onChange={onChangeAmount}
                 />
 
-                <TextField
-                    id="standard-select-currency"
-                    select
-                    label="Валюта"
-                    value={currencyOptions[0]}
-                                        
-                    >
-                    {currencyOptions.map((option) => (
-                        <MenuItem key={option} value={option}>
-                            {option}
-                        </MenuItem>
-                    ))}
-                </TextField>        
+                <div>               
+                    <InputLabel shrink htmlFor="age-native-label-placeholder">Валюта</InputLabel>
+                    <Select
+                        native
+                        value={selectCurrency}
+                        onChange={onChangeCurrency}
+                        >                  
+
+                        {currencyOptions.map((option) => (
+                            <option key={option} value={option}>
+                                {option}
+                            </option>
+                        ))}
+                    </Select>   
+                </div>             
             </form>
         </div>
     )

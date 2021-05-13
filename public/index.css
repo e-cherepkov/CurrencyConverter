@@ -1,0 +1,27 @@
+body{
+    margin: 0;
+}
+
+.wrapper{    
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}
+
+.converter-box{
+    width: max-content;
+}
+
+.currency-line{
+    display: inline-flex;
+}
+
+.currency-line-amount{
+    margin: 5px;
+}
+
+.replace-icon{
+    text-align: end;
+    padding-right: 5px;
+}

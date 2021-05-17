@@ -19,7 +19,7 @@ function InputCurrency(props){
                 <TextField                
                 label="Значение"
                 value={amount}
-                onChange={onChangeAmount}                
+                onChange={onChangeAmount}                         
                 />
                 </div>
 

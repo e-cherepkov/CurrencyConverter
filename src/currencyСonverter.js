@@ -16,11 +16,11 @@ function CurrencyConverter(){
     
     let toAmount, fromAmount
     if (amountInFromCurrency) {
-        fromAmount = amount
-        toAmount = amount * exchangeRate
+        fromAmount = amount        
+        toAmount = Math.floor((amount * exchangeRate) * 100) / 100
     } else {
         toAmount = amount
-        fromAmount = amount / exchangeRate
+        fromAmount = Math.floor((amount / exchangeRate) * 100) / 100
     }    
     
     useEffect(() => {
@@ -37,32 +37,33 @@ function CurrencyConverter(){
     }, [])
     
     function handleFromAmountChange(e) {
-        setAmount(e.target.value)
-        setAmountInFromCurrency(true)
+        if (e.target.value >= 0) {
+            setAmount(e.target.value)
+            setAmountInFromCurrency(true)
+        } 
     }
 
     function handleToAmountChange(e) {
-        setAmount(e.target.value)
-        setAmountInFromCurrency(false)
+        if (e.target.value >= 0) {
+            setAmount(e.target.value)
+            setAmountInFromCurrency(false)
+        }
     }
 
     function replaceCurrency() {
         var tmp = fromCurrency;
         setFromCurrency(toCurrency)
         setToCurrency(tmp)
-
         setExchangeRate(1/exchangeRate)
     }
 
     function handleToCurrencyChange(e) {
         setToCurrency(e.target.value)
-
         setExchangeRate(currencyRates[currencyOptions.indexOf(e.target.value)]/currencyRates[currencyOptions.indexOf(fromCurrency)])        
     }
 
     function handleFromCurrencyChange(e) {
         setFromCurrency(e.target.value)
-
         setExchangeRate(currencyRates[currencyOptions.indexOf(toCurrency)]/currencyRates[currencyOptions.indexOf(e.target.value)])
     }
         
